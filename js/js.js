@@ -36,3 +36,23 @@ producto.forEach(producto=>{
 const boton = document.createElement('button')
 boton.innerText='AGREGAR PRODUCTO'
 document.body.append(boton)
+
+const boton1 = document.createElement('button')
+boton1.innerText='TERMINAR COMPRAS'
+document.body.append(boton1)
+
+boton.onclick = ()=>{
+    const productoSelect = producto[selectList.selectedIndex]
+    carrito.push(productoSelect)
+}
+
+boton1.onclick = ()=> {
+    let totalCompra = 0
+    carrito.forEach((produ)=> {
+        totalCompra = totalCompra + produ.precio
+    })
+    const p = document.createElement('p')
+    p.innerText = "El costo Total es de : "+ totalCompra
+    document.body.append(p)
+}
+

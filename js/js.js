@@ -50,19 +50,12 @@ apellido: inputApellido.value
 }
 localStorage.setItem('usuarioStorage', JSON.stringify(usuario))
 divInicial.remove()
-saludar(usuario)
-}
-
-function saludar (user){
-    const saludoInicial = document.createElement('h2')
-    saludoInicial.innerText =`Bienvenido ${user.nombre} ${user.apellido}, a la tienda nuemro UNO EN VENTAS de ropas deportivas de todo el pais LISTO PARA REALIZAR TU COMPRA?`
-    divSaludo.append(saludoInicial)
-    divSaludo.append(botonAcceso)
-}
-
-botonAcceso.onclick = () => {
-    divSaludo.remove()
-    const parrafo = document.createElement('p')
+Swal.fire(
+    `Bienvenido ${usuario.nombre} ${usuario.apellido}, a la tienda nuemro UNO EN VENTAS de ropas deportivas de todo el pais LISTO PARA REALIZAR TU COMPRA?`,
+    'Vamos a comprar?',
+    'success'
+  )
+  const parrafo = document.createElement('p')
     parrafo.innerText = 'Seleccione Producto'
 
     
@@ -92,7 +85,17 @@ botonTerminar.onclick = () => {
     })
     const detalleCompra = document.createElement('p')
     function descuento (total){
-        return (total>1000 ? detalleCompra.innerText=`Felicitaciones tu compra es de: ${total} tienes un descuentoa de un 10 % en tu proxima compra`: detalleCompra.innerText=`El costo tatal es de: ${total}`)
+        return (total>1000 ? 
+            Swal.fire(
+            `Felicitaciones tu compra es de: ${total} tienes un descuentoa de un 10 % en tu proxima compra`,
+            'Te esperamos la proxima ves',
+            'success'
+          ):
+          Swal.fire(
+            `Tu compra es de: ${total}`,
+            'Te esperamos la proxima ves',
+            'success'
+            ))
     }
     descuento(totalCompra)
     divCompras.append(detalleCompra) 

@@ -12,6 +12,11 @@ const botonAcceso = document.createElement('button')
 botonAcceso.innerText = 'ACEPATAR'
 const listProductos = document.createElement('select')
 listProductos.setAttribute('id', 'listProductos')
+const divFinal = document.querySelector('.final')
+const btnMostrar = document.querySelector('.btnMostrar')
+const divMostrar =  document.querySelector('.card-group')
+const inputArticulo = document.querySelector('.inputArticulo')
+const btnBuscar = document.querySelector('.btnBuscar')
 
 
 let producto = []
@@ -98,5 +103,24 @@ botonTerminar.onclick = () => {
             ))
     }
     descuento(totalCompra)
-    divCompras.append(detalleCompra) 
+    divCompras.append(detalleCompra)
+    divCompras.remove()
+}
+
+btnMostrar.onclick = async () => {
+    const info = await fetch('./productos.json')
+    const infoJson = await info.json()
+    infoJson.forEach((element) => {
+        const divArticulo = document.createElement('div')
+        divArticulo.setAttribute('class', 'card')
+        divArticulo.innerHTML=`<div class="card">
+        <img src=${element.imagen} class="card-img-top" alt="...">
+        <div class="card-body">
+          <h5 class="card-title">${element.name}</h5>
+          <p class="card-text">${element.desc}</p>
+          <p class="card-text"><small class="text-muted">${element.precio}</small></p>
+        </div>
+      </div>`
+      divMostrar.append(divArticulo)
+    })
 }
